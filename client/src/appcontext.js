@@ -1,11 +1,11 @@
 import inject from './common/framework/inject';
 
-import generateUUID from 'common/framework/uuid';
+import generateUUID from './common/framework/uuid';
 
-import AppModule from 'App';
-import ConnectedClientsModule from 'status/ConnectedClients';
-import ConnectedUsersModule from 'status/ConnectedUsers';
-import ChatModule from 'chat/Chat';
+import AppModule from './App';
+import ConnectedClientsModule from './status/ConnectedClients';
+import ConnectedUsersModule from './status/ConnectedUsers';
+import ChatModule from './chat/Chat';
 import RoutingContext from './routing-context';
 
 function appContext(injected){

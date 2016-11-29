@@ -1,5 +1,5 @@
-import inject from 'common/framework/inject';
-import fakeIoModule from '_test/fakeIo';
+import inject from '../common/framework/inject';
+import fakeIoModule from '../_test/fakeIo';
 import webSocketModule from './webSocket';
 
 

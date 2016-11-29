@@ -8,10 +8,10 @@ global._ = require('lodash');
 
 // Require from common library.
 global._require = function(moduleName){
-    return require('client/src/common/' + moduleName)
+    return require("../client/src/common/" + moduleName)
 };
 
-global.inject = _require('framework/inject');
+global.inject = _require("framework/inject");
 
 if(process.env.NODE_ENV!=='production'){
     global.console.debug = global.console.log;

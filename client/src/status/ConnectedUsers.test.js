@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import ConnectedUsersModule from './ConnectedUsers';
-import FakeSocket from '_test/fakeSocket';
+import FakeSocket from '../_test/fakeSocket';
 
 describe('Connected users - socket io', function () {
 

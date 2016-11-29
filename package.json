@@ -13,11 +13,11 @@
     "db-migrate-pg": "^0.1.11",
     "express": "^4.10.4",
     "express-session": "^1.9.2",
-    "jade": "^1.7.0",
     "javascript-brunch": ">=1.7.1",
     "jshint-brunch": "^1.7.0",
     "parallelshell": "^2.0.0",
     "pg": "^6.1.0",
+    "pug": "^2.0.0-beta6",
     "socket.io": "^1.5.1"
   },
   "devDependencies": {

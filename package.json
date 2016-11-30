@@ -37,13 +37,13 @@
   "scripts": {
     "startclient": "cd ./client && npm run start",
     "buildclient": "cd ./client && npm run build",
-    "clean": "if [ -d ./build ]; then rm -r ./build; fi",
-    "start": "export NODE_PATH=. && npm run migratedb && nodemon run.js",
-    "createbuild": "[ -d build ] || mkdir build ",
-    "build": "export NODE_PATH=. && npm run clean && npm run createbuild && npm run buildclient && mv client/build build/static && cp -R server build/server && mkdir -p build/client/src && cp -r client/src/common build/client/src && cp run.js build",
-    "test": "export NODE_PATH=. && nodemon ./node_modules/jest/bin/jest.js",
-    "apitest": "export NODE_PATH=. && nodemon ./node_modules/jest/bin/jest.js --config apitest/functional-jest.json",
-    "loadtest": "export NODE_PATH=. && nodemon ./node_modules/jest/bin/jest.js --config apitest/loadtest-jest.json",
+    "clean": "if exist .\/build then rm -r .\/build",
+    "start": "set NODE_PATH=. && npm run migratedb && nodemon run.js",
+    "createbuild": "if not exist .\/build then mkdir build",
+    "build": "set NODE_PATH=. && npm run clean && npm run createbuild && npm run buildclient && mv client/build build/static && cp -R server build/server && mkdir -p build/client/src && cp -r client/src/common build/client/src && cp run.js build",
+    "test": "set NODE_PATH=. && nodemon ./node_modules/jest/bin/jest.js",
+    "apitest": "set NODE_PATH=. && nodemon ./node_modules/jest/bin/jest.js --config apitest/functional-jest.json",
+    "loadtest": "set NODE_PATH=. && nodemon ./node_modules/jest/bin/jest.js --config apitest/loadtest-jest.json",
     "dev": "./node_modules/.bin/parallelshell 'npm run start' 'npm run startclient'",
     "migratedb": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up"
   }

@@ -14,9 +14,9 @@
     "react-dom": "^15.3.2"
   },
   "scripts": {
-    "start": "export NODE_PATH=./src/ && react-scripts start",
-    "build": "export NODE_PATH=./src/ && react-scripts build",
-    "test": "export NODE_PATH=./src/ && react-scripts test --env=jsdom --watchAll",
+    "start": "set NODE_PATH=./src/ && react-scripts start",
+    "build": "set NODE_PATH=./src/ && react-scripts build",
+    "test": "set NODE_PATH=./src/ && react-scripts test --env=jsdom --watchAll",
     "eject": "react-scripts eject"
   }
 }

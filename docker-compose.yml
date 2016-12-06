@@ -12,8 +12,8 @@ services:
     ports:
       - '3000:3000'
     links:
-      - 'redis'
-  redis:
-    image: redis
+      - 'postgres'
+  postgres:
+    image: postgres
     ports:
-      - "6379:6379"
+      - "5432:5432"

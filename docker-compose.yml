@@ -2,18 +2,18 @@ version: '2'
 services:
   server:
     environment:
-      - 'REDIS_HOST=redis'
-      - 'REDIS_PORT=6379'
-      - 'PORT=3000'
-    image: 'into-docker'
+      - 'POSTGRES_HOST=pg2'
+      - 'POSTGRES_PORT=5432'
+      - 'PORT=8080'
+    image: 'stinni/tictactoe'
     build:
       context: '.'
       dockerfile: 'Dockerfile'
     ports:
-      - '3000:3000'
+      - '8080:8080'
     links:
-      - 'postgres'
-  postgres:
+      - 'pg2'
+  pg2:
     image: postgres
     ports:
       - "5432:5432"

@@ -9,4 +9,3 @@ cp -R server build/server
 mkdir -p build/client/src
 cp -r client/src/common build/client/src
 cp run.js build
-cp runserver.sh build

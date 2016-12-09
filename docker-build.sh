@@ -13,14 +13,14 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
-#echo "Building app"
-#npm run build
+echo "Building app"
+npm build
 
-#rc=$?
-#if [[ $rc != 0 ]]; then
-#    echo "Npm build failed with exit code " $rc
-#    exit $rc
-#fi
+rc=$?
+if [[ $rc != 0 ]]; then
+    echo "Npm build failed with exit code " $rc
+    exit $rc
+fi
 
 cat > ./dist/githash.txt <<_EOF_
 $GIT_COMMIT

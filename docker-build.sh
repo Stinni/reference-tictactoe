@@ -2,6 +2,8 @@
 
 echo Cleaning...
 rm -rf ./dist
+mkdir dist
+mkdir dist/public
 
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
@@ -11,16 +13,14 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
+#echo "Building app"
+#npm run build
 
-echo Building app
-npm build
-
-rc=$?
-if [[ $rc != 0 ]] ; then
-    echo "Npm build failed with exit code " $rc
-    exit $rc
-fi
-
+#rc=$?
+#if [[ $rc != 0 ]]; then
+#    echo "Npm build failed with exit code " $rc
+#    exit $rc
+#fi
 
 cat > ./dist/githash.txt <<_EOF_
 $GIT_COMMIT
@@ -39,23 +39,25 @@ cat > ./dist/public/version.html <<_EOF_
 </body>
 _EOF_
 
-
-cp ./Dockerfile ./build/
+cp ./package.json ./dist/
+cp ./Dockerfile ./dist/
 
 cd dist
-echo Building docker image
+tar -zcf build.tar.gz ../build
+
+echo "Building docker image"
 
 docker build -t stinni/tictactoe:$GIT_COMMIT .
 
 rc=$?
-if [[ $rc != 0 ]] ; then
+if [[ $rc != 0 ]]; then
     echo "Docker build failed " $rc
     exit $rc
 fi
 
 docker push stinni/tictactoe:$GIT_COMMIT
 rc=$?
-if [[ $rc != 0 ]] ; then
+if [[ $rc != 0 ]]; then
     echo "Docker push failed " $rc
     exit $rc
 fi

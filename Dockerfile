@@ -4,4 +4,4 @@ COPY package.json .
 RUN npm install --silent
 ADD build.tar.gz .
 EXPOSE 8080
-CMD ["node", "./build/run.js"]
+CMD ["node", "build/run.js"]

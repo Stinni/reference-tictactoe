@@ -2,7 +2,6 @@
 /bower_components
 /public
 /build
-/dist
 /.idea/
 todo.md
 *.log

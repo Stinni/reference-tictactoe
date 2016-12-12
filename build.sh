@@ -1,7 +1,11 @@
 #!/bin/bash
 
 export NODE_PATH=.
-npm run clean
+
+echo "Cleaning..."
+./clean.sh
+
+echo "Building app"
 npm run createbuild
 npm run buildclient
 mv client/build build/static

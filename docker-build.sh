@@ -1,10 +1,5 @@
 #!/bin/bash
 
-echo Cleaning...
-rm -rf ./dist
-mkdir dist
-mkdir dist/public
-
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
   export GIT_URL=$(git config --get remote.origin.url)
@@ -13,7 +8,6 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
-echo "Building app"
 ./build.sh
 
 rc=$?
@@ -22,11 +16,11 @@ if [[ $rc != 0 ]]; then
     exit $rc
 fi
 
-cat > ./dist/.env <<_EOF_
+cat > .env <<_EOF_
 GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
-cat > ./dist/public/version.html <<_EOF_
+cat > ./build/public/version.html <<_EOF_
 <!doctype html>
 <head>
    <title>App version information</title>
@@ -39,14 +33,11 @@ cat > ./dist/public/version.html <<_EOF_
 </body>
 _EOF_
 
-cp ./package.json ./dist/
-cp ./Dockerfile ./dist/
-cp ./docker-compose.yml ./dist/
-cp ./runserver.sh ./dist/
+cp ./package.json ./build/
+cp ./Dockerfile ./build/
+cp ./runserver.sh ./build/
 
-cd dist
-
-tar -zcf build.tar.gz ../build
+cd build
 
 echo "Building docker image"
 

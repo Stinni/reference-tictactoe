@@ -1,7 +1,8 @@
 FROM node
 WORKDIR /code
-COPY package.json .
+COPY . .
 RUN npm install --silent
-ADD build.tar.gz .
-EXPOSE 8080
-CMD ["node", "build/run.js"]
+EXPOSE 3000
+ENV NODE_PATH .
+RUN chmod u+x runserver.sh
+CMD ["./runserver.sh"]

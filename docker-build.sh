@@ -43,7 +43,6 @@ cp ./package.json ./dist/
 cp ./Dockerfile ./dist/
 
 cd dist
-tar -zcf build.tar.gz ../build
 
 echo "Building docker image"
 

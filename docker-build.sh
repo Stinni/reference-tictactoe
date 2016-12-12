@@ -14,7 +14,7 @@ fi
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
 echo "Building app"
-npm build
+./build.sh
 
 rc=$?
 if [[ $rc != 0 ]]; then
@@ -22,8 +22,8 @@ if [[ $rc != 0 ]]; then
     exit $rc
 fi
 
-cat > ./dist/githash.txt <<_EOF_
-$GIT_COMMIT
+cat > ./dist/.env <<_EOF_
+GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
 cat > ./dist/public/version.html <<_EOF_
@@ -41,8 +41,12 @@ _EOF_
 
 cp ./package.json ./dist/
 cp ./Dockerfile ./dist/
+cp ./docker-compose.yml ./dist/
+cp ./runserver.sh ./dist/
 
 cd dist
+
+tar -zcf build.tar.gz ../build
 
 echo "Building docker image"
 

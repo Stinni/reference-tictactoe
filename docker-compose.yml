@@ -1,16 +1,20 @@
 version: '2'
 services:
   server:
+    image: stinni/tictactoe:${GIT_COMMIT}
     environment:
-      - 'POSTGRES_HOST=pg2'
-      - 'POSTGRES_PORT=5432'
-      - 'PORT=8080'
-    image: 'stinni/tictactoe'
+      - 'PGHOST=pg2'
+      - 'PGPORT=5432'
+      - 'PORT=3000'
+      - 'NODE_ENV=production'
     ports:
       - '8080:8080'
-    links:
+      - '80:3000'
+    depends_on:
       - 'pg2'
   pg2:
     image: postgres
+    environment:
+      - 'POSTGRES_PASSWORD=mysecretpassword'
     ports:
-      - "5432:5432"
+      - '5432:5432'

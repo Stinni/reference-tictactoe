@@ -15,4 +15,15 @@ kristinnf13@ru.is
 
 -- Status 13/12/16 --
 
-1. 
+1. Docker Compose virkar hjá mér og build scripturnar keyra á Jenkins/Advania. Ég á eftir að commenta scripturnar, geri það núna eftir að ég sendi statusinn og uppfæri svo á github. Jenkins athugar á 5 mín fresti hvort breytingar hafi orðið á github og keyrir scripturnar þar ef svo er.
+Ég á eftir að koma docker inná AWS vélina sem er í gangi og á eftir að prufa mig áfram með provision.
+Næsta skref er að koma testunum í gang á Jenkins og svo fer ég í AWS pælingar og svo TicTacToe forritun. :)
+
+2.
+a. https://github.com/Stinni/reference-tictactoe
+b. ec2-52-214-44-254.eu-west-1.compute.amazonaws.com
+c. http://82.221.48.65:8080/
+   user: hgop
+   passw: qDaXFH7JAm
+
+Sama password og ubuntu userinn

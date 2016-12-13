@@ -8,6 +8,11 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
+cd client
+npm install --silent
+cd ..
+npm install --silent
+
 ./build.sh
 
 rc=$?
@@ -36,24 +41,5 @@ _EOF_
 cp ./package.json ./build/
 cp ./Dockerfile ./build/
 cp ./runserver.sh ./build/
-
-cd build
-
-echo "Building docker image"
-
-docker build -t stinni/tictactoe:$GIT_COMMIT .
-
-rc=$?
-if [[ $rc != 0 ]]; then
-    echo "Docker build failed " $rc
-    exit $rc
-fi
-
-docker push stinni/tictactoe:$GIT_COMMIT
-rc=$?
-if [[ $rc != 0 ]]; then
-    echo "Docker push failed " $rc
-    exit $rc
-fi
 
 echo "Done"

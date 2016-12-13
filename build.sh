@@ -3,7 +3,7 @@
 export NODE_PATH=.
 
 echo "Cleaning..."
-./clean.sh
+npm run clean
 
 echo "Building app"
 npm run createbuild

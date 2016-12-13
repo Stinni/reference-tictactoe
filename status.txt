@@ -1,0 +1,18 @@
+
+Kristinn Heiðar Freysteinsson
+kristinnf13@ru.is
+
+-- Status 9/12/16 --
+
+1. Ég kláraði day1 og day2 fyrir utan Docker Compose, er að vinna í því núna. Day3 er einnig nánast búinn hjá mér, ég hins vegar ruglaðist aðeins og hélt að nota ætti 'AWS Command Line Interface' til að starta upp vélinni. Ég er að starta upp vél núna.
+Ég ætti einnig að ná að klára day5 og day6 í dag, ætlaði að setja upp Jenkins á Advania vél en það var engin laus. Verið er að vinna í því.
+
+
+2.
+ a. https://github.com/Stinni/reference-tictactoe
+ b. ec2-52-214-44-254.eu-west-1.compute.amazonaws.com
+ c. working on it :)
+
+-- Status 13/12/16 --
+
+1. 

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -z "$GIT_COMMIT" ]; then
+  export GIT_COMMIT=$(git rev-parse HEAD)
+fi
+
 cd build
 
 echo "Building docker image"

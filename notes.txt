@@ -1,7 +1,0 @@
-pagerduty
-datadog
-jira
-django
-kibana
-zookeeper
-terraform

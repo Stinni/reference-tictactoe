@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Checking if the 'GIT_COMMIT' environment variable is set and setting it if it isn't.
+# It's needed for the .env file and the version.html file that're made.
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
   export GIT_URL=$(git config --get remote.origin.url)
@@ -8,6 +10,7 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
+# TODO: FINISH COMMENTING!!!
 cd client
 npm install --silent
 cd ..

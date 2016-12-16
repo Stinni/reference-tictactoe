@@ -1,6 +1,6 @@
 ## Who am I ?
 
-
+My name is Kristinn Heiðar Freysteinsson
 
 
 

@@ -1,20 +1,22 @@
 version: '2'
 services:
   server:
-    image: stinni/tictactoe:${GIT_COMMIT}
+    image: stinni/tictactoe:${GIT_COMMIT}     # Tells docker-compose which image to use. ${GIT_COMMIT} is from the .env file
     environment:
-      - 'PORT=8080'
-      - 'NODE_ENV=production'
+      - 'PORT=8080'                           # The port that the server listens to
+      - 'NODE_ENV=production'                 # Sets the running mode of the server to production mode
+      - 'PGHOST=pg2'                          # DB host's name
+      - 'PGPORT=5432'                         # DB host's port
+      - 'PGPASSWORD=mysecretpassword'         # DB host's password
     ports:
-      - '8080:8080'
-      - '80:3000'
+      - '80:8080'                             # exposes port 80 and maps it to port 8080 which the server is listening to
     links:
-      - 'pg2'
+      - 'pg2'                                 # Links the server to the database
     depends_on:
-      - 'pg2'
+      - 'pg2'                                 # Makes sure that the DB container is started before the server container
   pg2:
-    image: postgres
+    image: postgres                           # Tells docker-compose which image to use.
     environment:
-      - 'POSTGRES_PASSWORD=mysecretpassword'
+      - 'POSTGRES_PASSWORD=mysecretpassword'  # The database password
     ports:
-      - '5432:5432'
+      - '5432:5432'                           # The DB's port

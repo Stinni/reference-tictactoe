@@ -46,6 +46,25 @@ module.exports = function(injected){
 
                         // Check here for conditions which prevent command from altering state
 
+                        /*if(!gameState.isItYourTurn(cmd.side)) {
+                            eventHandler([{
+                                gameId: cmd.gameId,
+                                type: "NotYourMove",
+
+                            }]);
+                            return;
+                        }*/
+
+                        var events = [{
+                            gameId: cmd.gameId,
+                            type: "MovePlaced",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp,
+                            side: cmd.side,
+                            coordinates: cmd.coordinates
+                        }];
+
                         gameState.processEvents(events);
 
                         // Check here for conditions which may warrant additional events to be emitted.

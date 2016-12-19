@@ -5,14 +5,17 @@ module.exports = function (injected) {
     return function (history) {
 
         var gamefull = false;
+        var turnsPlayed = 0;
+        var gameOver = false;
+        var gameBoard = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]];
 
         function processEvent(event) {
             if(event.type === "GameJoined") {
                 gamefull = true;
             }
-            /*if(event.type === "") {
-                TODO: add something here... :)
-            }*/
+            if(event.type === "MovePlaced") {
+                turnsPlayed++;
+            }
         }
 
         function processEvents(history) {
@@ -23,11 +26,16 @@ module.exports = function (injected) {
             return gamefull;
         }
 
+        /*function isItYourTurn() {
+            return true; // use modulo 2 on turnsPlayed :)
+        }*/
+
         processEvents(history);
 
         return {
-            gameFull: gameFull,
-            processEvents: processEvents
+            processEvents: processEvents,
+            gameFull: gameFull/*,
+            isItYourTurn: isItYourTurn*/
         }
     };
 };

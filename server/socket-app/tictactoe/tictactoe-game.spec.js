@@ -8,6 +8,7 @@ var tictactoe = require('./tictactoe-handler')(inject({
 }));
 
 var gameCreatedEvent = {
+    gameId:"123987",
     type: "GameCreated",
     user: {
         userName: "TheGuy"
@@ -18,6 +19,7 @@ var gameCreatedEvent = {
 };
 
 var gameJoinedEvent = {
+    gameId:"123987",
     type: "GameJoined",
     user: {
         userName: "Gummi"
@@ -49,7 +51,7 @@ describe('create game command', function() {
         given = [];
         when =
         {
-            id:"123987",
+            gameId:"123987",
             type: "CreateGame",
             user: {
                 userName: "TheGuy"
@@ -84,6 +86,7 @@ describe('join game command', function () {
         given = [gameCreatedEvent];
         when =
         {
+            gameId:"123987",
             type: "JoinGame",
             user: {
                 userName: "Gummi"
@@ -99,6 +102,7 @@ describe('join game command', function () {
         given = [gameCreatedEvent, gameJoinedEvent];
         when =
         {
+            gameId:"123987",
             type: "JoinGame",
             user: {
                 userName: "Gulli"
@@ -108,6 +112,7 @@ describe('join game command', function () {
         };
         then = [
             {
+                gameId:"123987",
                 type: "FullGameJoinAttempted",
                 user: {
                     userName: "Gulli"
@@ -136,11 +141,12 @@ describe('place move command', function() {
     });
 
 
-    it('should emit MovePlaced on first game move', function(){
+    it('should emit MovePlaced on first game move...', function(){
 
         given = [gameCreatedEvent, gameJoinedEvent];
         when =
         {
+            gameId:"123987",
             type: "PlaceMove",
             user: {
                 userName: "TheGuy"
@@ -154,6 +160,7 @@ describe('place move command', function() {
             }
         };
         then = [{
+            gameId:"123987",
             type: "MovePlaced",
             user: {
                 userName: "TheGuy"
@@ -177,3 +184,26 @@ describe('place move command', function() {
     });
     */
 });
+
+/*
+- should emit IllegalMove when square is already occupied
+```
+Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}], When: {PlaceMove(0,0:O)}, Then: [{IllegalMove}]
+```
+- Should emit NotYourMove if attempting to make move out of turn
+```
+Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}], When: {PlaceMove(0,1:X)}, Then: [{NotYourMove}]
+```
+- Should emit game won
+```
+Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}, {MovePlaced(2,0:O)}, {MovePlaced(0,1:X)}, {MovePlaced(2,1:O)}], When: {PlaceMove(0,2:X)}, Then: [{GameWon}]
+```
+- Should not emit game draw if won on last move
+```
+Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}, {MovePlaced(1,0:O)}, {MovePlaced(2,0:X)}, {MovePlaced(0,1:O)}, {MovePlaced(0,2:X)}, {MovePlaced(1,2:O)}, {MovePlaced(2,2:X)}, {MovePlaced(2,1:O)}], When: {PlaceMove(1,1:X)}, Then: [{GameWon}]
+```
+- Should emit game draw when neither wins
+```
+Given: [{GameCreated}, {GameJoined}, {MovePlaced(1,0:X)}, {MovePlaced(0,0:O)}, {MovePlaced(1,1:X)}, {MovePlaced(1,2:O)}, {MovePlaced(0,2:X)}, {MovePlaced(2,0:O)}, {MovePlaced(2,1:X)}, {MovePlaced(0,1:O)}], When: {PlaceMove(2,2:X)}, Then: [{GameWon}]
+```
+*/

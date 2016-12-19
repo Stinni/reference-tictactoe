@@ -26,16 +26,24 @@ http://52.214.44.254/
 
 
 ## Scripts:
-Outline what script files you created and the purpose of each file. Each file should be commented. This could be
-Docker build
-Docker compose
-AWS Provisioning 
-Other scripts
+
+- build.sh - This is the build script from the package.json file. It simply cleans up (deletes) a previous build (if present) and then builds the application.
+
+- build-code.sh - This script uses the build.sh script to build the application. It sets environment variables that're used during the build process and also stores the GIT_COMMIT hash in an .env file that's used later by the docker-compose command. It ends with copying a few files that're needed to build the docker image.
+
+- build-docker.sh - This script takes care of building the docker image from the newest code and pushes it to the dockerhub.
+
+- build-deployment.sh - This script stops the current running docker-compose containers on the AWS machine, copies the .yml and .env files to said machine and then runs docker-compose to start up the new version.
+
+- AWS Provisioning & Docker compose - I did not get as far as doing the AWS provisioning. I also didn't create any scripts for running docker compose.
+
+- Other scripts - I added a few scripts to the package.json file but I ended up deleting most of them as they weren't needed. I did keep the 'migratedbProd' script I added for simplicity in running the production environment.
+
 <hr />
 
 
 
-## Testing & logic
+## Testing & logic:
 Outline what tests you created.
 UnitTests, server logic TDD (Git commit log)
 API Acceptance test - fluent API

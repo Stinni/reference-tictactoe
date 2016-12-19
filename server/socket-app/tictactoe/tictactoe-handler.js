@@ -55,6 +55,17 @@ module.exports = function(injected){
                             return;
                         }*/
 
+                        if(!gameState.isCellEmpty(cmd.coordinates)) {
+                            eventHandler([{
+                                gameId: cmd.gameId,
+                                type: "IllegalMove",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp
+                            }]);
+                            return;
+                        }
+
                         var events = [{
                             gameId: cmd.gameId,
                             type: "MovePlaced",

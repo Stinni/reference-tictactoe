@@ -25,9 +25,54 @@ var gameJoinedEvent = {
         userName: "Gummi"
     },
     name: "TheFirstGame",
-    timeStamp: "2016-12-02T11:29:29",
+    timeStamp: "2016-12-02T11:29:30",
     side:'O'
-}
+};
+
+var placeMoveXOnZeroZero = {
+    gameId:"123987",
+    type: "PlaceMove",
+    user: {
+        userName: "TheGuy"
+    },
+    name: "TheFirstGame",
+    timeStamp: "2016-12-02T11:30:00",
+    side: "X",
+    coordinates: {
+        x: 0,
+        y: 0
+    }
+};
+
+var movePlacedXOnZeroZeroEvent = {
+    gameId:"123987",
+    type: "MovePlaced",
+    user: {
+        userName: "TheGuy"
+    },
+    name: "TheFirstGame",
+    timeStamp: "2016-12-02T11:30:00",
+    side: "X",
+    coordinates: {
+        x: 0,
+        y: 0
+    }
+};
+
+var movePlacedOOnZeroZero = {
+    gameId:"123987",
+    type: "PlaceMove",
+    user: {
+        userName: "Gummi"
+    },
+    name: "TheFirstGame",
+    timeStamp: "2016-12-02T11:30:30",
+    side: "O",
+    coordinates: {
+        x: 0,
+        y: 0
+    }
+};
 
 describe('create game command', function() {
 
@@ -65,7 +110,6 @@ describe('create game command', function() {
 
 describe('join game command', function () {
 
-
     var given, when, then;
 
     beforeEach(function () {
@@ -80,7 +124,6 @@ describe('join game command', function () {
         });
     });
 
-
     it('should emit game joined event...', function () {
 
         given = [gameCreatedEvent];
@@ -92,7 +135,7 @@ describe('join game command', function () {
                 userName: "Gummi"
             },
             name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:29:29"
+            timeStamp: "2016-12-02T11:29:30"
         };
         then = [gameJoinedEvent];
     })
@@ -110,17 +153,15 @@ describe('join game command', function () {
             name: "TheFirstGame",
             timeStamp: "2016-12-02T11:30:29"
         };
-        then = [
-            {
-                gameId:"123987",
-                type: "FullGameJoinAttempted",
-                user: {
-                    userName: "Gulli"
-                },
-                name: "TheFirstGame",
-                timeStamp: "2016-12-02T11:30:29"
-            }
-        ];
+        then = [{
+            gameId:"123987",
+            type: "FullGameJoinAttempted",
+            user: {
+                userName: "Gulli"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:30:29"
+        }];
     })
 });
 
@@ -140,25 +181,10 @@ describe('place move command', function() {
         });
     });
 
-
     it('should emit MovePlaced on first game move...', function(){
 
         given = [gameCreatedEvent, gameJoinedEvent];
-        when =
-        {
-            gameId:"123987",
-            type: "PlaceMove",
-            user: {
-                userName: "TheGuy"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:30:29",
-            side: "X",
-            coordinates: {
-                x: 0,
-                y: 0
-            }
-        };
+        when = placeMoveXOnZeroZero;
         then = [{
             gameId:"123987",
             type: "MovePlaced",
@@ -166,30 +192,41 @@ describe('place move command', function() {
                 userName: "TheGuy"
             },
             name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:30:29",
+            timeStamp: "2016-12-02T11:30:00",
             side: "X",
             coordinates: {
                 x: 0,
                 y: 0
             }
         }];
-    });
+    })
+
+    it('should emit IllegalMove when square is already occupied...', function(){
+
+        given = [gameCreatedEvent, gameJoinedEvent, movePlacedXOnZeroZeroEvent];
+        when = movePlacedOOnZeroZero;
+        then = [{
+            gameId:"123987",
+            type: "IllegalMove",
+            user: {
+                userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:30:30"
+        }];
+    })
 
     /*
-    it('should emit MovePlaced on first game move', function(){
+    it('', function(){
 
         given = [];
         when = {};
         then = [];
-    });
+    })
     */
 });
 
 /*
-- should emit IllegalMove when square is already occupied
-```
-Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}], When: {PlaceMove(0,0:O)}, Then: [{IllegalMove}]
-```
 - Should emit NotYourMove if attempting to make move out of turn
 ```
 Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}], When: {PlaceMove(0,1:X)}, Then: [{NotYourMove}]

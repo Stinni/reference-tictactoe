@@ -14,6 +14,7 @@ module.exports = function (injected) {
                 gamefull = true;
             }
             if(event.type === "MovePlaced") {
+                gameBoard[event.coordinates.x][event.coordinates.y] = event.side;
                 turnsPlayed++;
             }
         }
@@ -26,7 +27,11 @@ module.exports = function (injected) {
             return gamefull;
         }
 
-        /*function isItYourTurn() {
+        function isCellEmpty(coordinates) {
+            return gameBoard[coordinates.x][coordinates.y] === "-";
+        }
+
+        /*function isItYourTurn(event) {
             return true; // use modulo 2 on turnsPlayed :)
         }*/
 
@@ -34,7 +39,8 @@ module.exports = function (injected) {
 
         return {
             processEvents: processEvents,
-            gameFull: gameFull/*,
+            gameFull: gameFull,
+            isCellEmpty: isCellEmpty/*,
             isItYourTurn: isItYourTurn*/
         }
     };

@@ -37,7 +37,7 @@ http://52.214.44.254/
 
 - AWS Provisioning & Docker compose - I did not get as far as doing the AWS provisioning. I also didn't create any scripts for running docker compose.
 
-- Other scripts - I added a few scripts to the package.json file but I ended up deleting most of them as they weren't needed. I did keep the 'migratedbProd' script I added for simplicity in running the production environment.
+- Other scripts - I added a few scripts to the package.json file in the project root but I ended up deleting most of them as they weren't needed. I did keep the 'migratedbProd' script I added for simplicity in running the production environment. I also added the 'utest' scripts to both package.json files and they're used on the Jenkins server during the 'Unit Test Stage.'
 
 <hr />
 

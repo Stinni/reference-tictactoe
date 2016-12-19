@@ -15,6 +15,7 @@ node {
 			},
 			"Client": {
 				echo "To be finished..."
+				sh 'npm run utest'
 			}
 		)
 	}

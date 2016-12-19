@@ -7,6 +7,11 @@ node {
 		checkout scm
 	}
 
+	stage('Unit Tests Stage') {
+		echo "Starting Unit Tests Stage"
+		
+	}
+
 	stage('Build Stage') {
 		echo "Starting Build Stage"
 		sh './build-code.sh'

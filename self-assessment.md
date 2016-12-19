@@ -2,13 +2,11 @@
 <hr />
 
 
-
 ## Git Repository:
 https://github.com/Stinni/reference-tictactoe
 
 (hap2000 has been added as a collaborator and should have commit/push access)
 <hr />
-
 
 
 ## Jenkins URL, username and password:
@@ -18,11 +16,9 @@ http://82.221.48.65:8080/
 <hr />
 
 
-
 ## Game URL (AWS):
 http://52.214.44.254/
 <hr />
-
 
 
 ## Scripts:
@@ -42,57 +38,43 @@ http://52.214.44.254/
 <hr />
 
 
-
 ## Testing & logic:
-Outline what tests you created.
-UnitTests, server logic TDD (Git commit log)
-API Acceptance test - fluent API
-Load test loop
-UI TDD
-Is the game playable?
-<hr />
 
+I've been sick a lot this term and this course was no different. I've not been able to do as much as I'd have liked. And I might have focused a bit too much on everything else than actually developing the game and the tests. So I've only managed to get a few of the unit tests for the server logic working and just a bit of the server logic itself.
+
+I tried to follow the TDD method as Gulli described it but I'm not sure I was doing it right. I only got carried away once though and started implementing something for a test that I hadn't got to yet.
+
+I've not managed to get any of the API Acceptance tests nor the load tests running.
+
+Is the game playable? No I'm afraid not, not at this moment at least... it might be closer to Christmas though! =)
+<hr />
 
 
 ## Data migration
-Did you create a data migration.
-Migration up and down
-<hr />
 
+Did I create a data migration. Hmmmm... I'm not sure. I did create a new file in the './server/migrations/' folder to add in the 'aggregate_id' column. I'm guessing that's what's meant with this question.
+<hr />
 
 
 ## Jenkins
-Do you have the following Jobs and what happens in each Job:
-Commit Stage
-Acceptance Stage
-Capacity Stage
-Other
-<hr />
+
+I started by using a schedule for checking if there had been any changes done to the github repository. I changed that into a web hook later on. The only way I found to make a web hook work with a pipeline was to have a separate job that detects the hook and then starts up the pipeline. The pipeline I set up uses a Jenkinsfile from the github repository.
+
+I've named my stages a bit differently:
+- Commit Stage - pulls the new code from the github repository
+- Unit Tests Stage - runs unit tests on both server and client logic
+- Build Stage - builds the application and then the docker image and pushes it to dockerhub
+- Deployment Stage - takes care of stopping the docker containers on the AWS machine, prepares the new one and starts them up
 
 
-
-Did you use any of the following features in Jenkins?
-
-- Schedule or commit hooks
-
+I used the following features in Jenkins:
+- commit hooks
 - Pipeline
-
 - Jenkins file
 
-- Test reports
-
-- Other
-
+<hr />
 
 
 ## Monitoring
 
-Did you do any monitoring?
-
-- URL to monitoring tool. Must be open or include username and pass.
-
-
-
-## Other
-
-Anything else you did to improve you deployment pipeline of the project itself?
+I didn't implement any monitoring.

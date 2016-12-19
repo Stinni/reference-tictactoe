@@ -7,6 +7,26 @@ var tictactoe = require('./tictactoe-handler')(inject({
     TictactoeState
 }));
 
+var gameCreatedEvent = {
+    type: "GameCreated",
+    user: {
+        userName: "TheGuy"
+    },
+    name: "TheFirstGame",
+    timeStamp: "2016-12-02T11:29:29",
+    side:'X'
+};
+
+var gameJoinedEvent = {
+    type: "GameJoined",
+    user: {
+        userName: "Gummi"
+    },
+    name: "TheFirstGame",
+    timeStamp: "2016-12-02T11:29:29",
+    side:'O'
+}
+
 describe('create game command', function() {
 
     var given, when, then;
@@ -37,18 +57,7 @@ describe('create game command', function() {
             name: "TheFirstGame",
             timeStamp: "2016-12-02T11:29:29"
         };
-        then = [
-            {
-                type: "GameCreated",
-                user: {
-                    userName: "TheGuy"
-                },
-                name: "TheFirstGame",
-                timeStamp: "2016-12-02T11:29:29",
-                side:'X'
-            }
-        ];
-
+        then = [gameCreatedEvent];
     })
 });
 
@@ -72,15 +81,7 @@ describe('join game command', function () {
 
     it('should emit game joined event...', function () {
 
-        given = [{
-            type: "GameCreated",
-            user: {
-                userName: "TheGuy"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:29:29"
-        }
-        ];
+        given = [gameCreatedEvent];
         when =
         {
             type: "JoinGame",
@@ -90,39 +91,12 @@ describe('join game command', function () {
             name: "TheFirstGame",
             timeStamp: "2016-12-02T11:29:29"
         };
-        then = [
-            {
-                type: "GameJoined",
-                user: {
-                    userName: "Gummi"
-                },
-                name: "TheFirstGame",
-                timeStamp: "2016-12-02T11:29:29",
-                side:'O'
-            }
-        ];
-
-    });
+        then = [gameJoinedEvent];
+    })
 
     it('should emit FullGameJoinAttempted event when game full...', function () {
 
-        given = [{
-            type: "GameCreated",
-            user: {
-                userName: "TheGuy"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:29:29"
-        },
-        {
-            type: "GameJoined",
-            user: {
-                userName: "Gummi"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:29:29",
-            side:'O'
-        }];
+        given = [gameCreatedEvent, gameJoinedEvent];
         when =
         {
             type: "JoinGame",
@@ -142,7 +116,7 @@ describe('join game command', function () {
                 timeStamp: "2016-12-02T11:30:29"
             }
         ];
-    });
+    })
 });
 
 describe('place move command', function() {
@@ -164,9 +138,34 @@ describe('place move command', function() {
 
     it('should emit MovePlaced on first game move', function(){
 
-        given = [];
-        when = {};
-        then = [];
+        given = [gameCreatedEvent, gameJoinedEvent];
+        when =
+        {
+            type: "PlaceMove",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:30:29",
+            side: "X",
+            coordinates: {
+                x: 0,
+                y: 0
+            }
+        };
+        then = [{
+            type: "MovePlaced",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:30:29",
+            side: "X",
+            coordinates: {
+                x: 0,
+                y: 0
+            }
+        }];
     });
 
     /*

@@ -10,6 +10,9 @@ module.exports = function (injected) {
             if(event.type === "GameJoined") {
                 gamefull = true;
             }
+            /*if(event.type === "") {
+                TODO: add something here... :)
+            }*/
         }
 
         function processEvents(history) {

@@ -46,15 +46,6 @@ module.exports = function(injected){
 
                         // Check here for conditions which prevent command from altering state
 
-                        /*if(!gameState.isItYourTurn(cmd.side)) {
-                            eventHandler([{
-                                gameId: cmd.gameId,
-                                type: "NotYourMove",
-
-                            }]);
-                            return;
-                        }*/
-
                         if(!gameState.isCellEmpty(cmd.coordinates)) {
                             eventHandler([{
                                 gameId: cmd.gameId,
@@ -65,6 +56,15 @@ module.exports = function(injected){
                             }]);
                             return;
                         }
+
+                        /*if(!gameState.isItYourTurn(cmd.side)) {
+                            eventHandler([{
+                                gameId: cmd.gameId,
+                                type: "NotYourMove",
+
+                            }]);
+                            return;
+                        }*/
 
                         var events = [{
                             gameId: cmd.gameId,

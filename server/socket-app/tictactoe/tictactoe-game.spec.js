@@ -185,20 +185,7 @@ describe('place move command', function() {
 
         given = [gameCreatedEvent, gameJoinedEvent];
         when = placeMoveXOnZeroZero;
-        then = [{
-            gameId:"123987",
-            type: "MovePlaced",
-            user: {
-                userName: "TheGuy"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2016-12-02T11:30:00",
-            side: "X",
-            coordinates: {
-                x: 0,
-                y: 0
-            }
-        }];
+        then = [movePlacedXOnZeroZeroEvent];
     })
 
     it('should emit IllegalMove when square is already occupied...', function(){

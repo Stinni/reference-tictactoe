@@ -14,7 +14,7 @@ node {
 				sh 'npm run utest'
 			},
 			"Client": {
-				echo "To be finished..."
+				sh 'cd client'
 				sh 'npm run utest'
 			}
 		)

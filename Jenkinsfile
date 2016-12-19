@@ -9,19 +9,18 @@ node {
 
 	stage('Unit Tests Stage') {
 		echo "Starting Unit Tests Stage"
-		parallel server: {
-			node('server') {
+		parallel (
+			"Server": {
 				echo "Running unit tests on the server"
 				sh 'npm run utest'
 				echo "Done running unit tests on the server"
-			}
-		}, client: {
-			node('client') {
+			},
+			"Client": {
 				echo "Running unit tests on the client"
 				sh 'npm --prefix ./client run utest'
 				echo "Done running unit tests on the client"
 			}
-		}
+		)
 	}
 
 	stage('Build Stage') {

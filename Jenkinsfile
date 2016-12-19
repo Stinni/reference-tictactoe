@@ -9,7 +9,14 @@ node {
 
 	stage('Unit Tests Stage') {
 		echo "Starting Unit Tests Stage"
-		
+		parallel (
+			"Server": {
+				sh 'npm run utest'
+			},
+			"Client": {
+				echo "To be finished..."
+			}
+		)
 	}
 
 	stage('Build Stage') {

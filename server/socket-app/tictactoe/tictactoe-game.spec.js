@@ -7,7 +7,6 @@ var tictactoe = require('./tictactoe-handler')(inject({
     TictactoeState
 }));
 
-
 describe('create game command', function() {
 
     var given, when, then;
@@ -36,7 +35,7 @@ describe('create game command', function() {
                 userName: "TheGuy"
             },
             name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29"
+            timeStamp: "2016-12-02T11:29:29"
         };
         then = [
             {
@@ -45,14 +44,13 @@ describe('create game command', function() {
                     userName: "TheGuy"
                 },
                 name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:29:29",
+                timeStamp: "2016-12-02T11:29:29",
                 side:'X'
             }
         ];
 
     })
 });
-
 
 describe('join game command', function () {
 
@@ -80,7 +78,7 @@ describe('join game command', function () {
                 userName: "TheGuy"
             },
             name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29"
+            timeStamp: "2016-12-02T11:29:29"
         }
         ];
         when =
@@ -90,7 +88,7 @@ describe('join game command', function () {
                 userName: "Gummi"
             },
             name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29"
+            timeStamp: "2016-12-02T11:29:29"
         };
         then = [
             {
@@ -99,7 +97,7 @@ describe('join game command', function () {
                     userName: "Gummi"
                 },
                 name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:29:29",
+                timeStamp: "2016-12-02T11:29:29",
                 side:'O'
             }
         ];
@@ -114,7 +112,7 @@ describe('join game command', function () {
                 userName: "TheGuy"
             },
             name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29"
+            timeStamp: "2016-12-02T11:29:29"
         },
         {
             type: "GameJoined",
@@ -122,7 +120,7 @@ describe('join game command', function () {
                 userName: "Gummi"
             },
             name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29",
+            timeStamp: "2016-12-02T11:29:29",
             side:'O'
         }];
         when =
@@ -132,7 +130,7 @@ describe('join game command', function () {
                 userName: "Gulli"
             },
             name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:30:29"
+            timeStamp: "2016-12-02T11:30:29"
         };
         then = [
             {
@@ -141,8 +139,42 @@ describe('join game command', function () {
                     userName: "Gulli"
                 },
                 name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:30:29"
+                timeStamp: "2016-12-02T11:30:29"
             }
         ];
     });
+});
+
+describe('place move command', function() {
+
+    var given, when, then;
+
+    beforeEach(function(){
+        given=undefined;
+        when=undefined;
+        then=undefined;
+    });
+
+    afterEach(function () {
+        tictactoe(given).executeCommand(when, function(actualEvents){
+            should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+        });
+    });
+
+
+    it('should emit MovePlaced on first game move', function(){
+
+        given = [];
+        when = {};
+        then = [];
+    });
+
+    /*
+    it('should emit MovePlaced on first game move', function(){
+
+        given = [];
+        when = {};
+        then = [];
+    });
+    */
 });

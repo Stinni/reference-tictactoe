@@ -57,14 +57,16 @@ module.exports = function(injected){
                             return;
                         }
 
-                        /*if(!gameState.isItYourTurn(cmd.side)) {
+                        if(!gameState.isItYourTurn(cmd.side)) {
                             eventHandler([{
                                 gameId: cmd.gameId,
                                 type: "NotYourMove",
-
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp
                             }]);
                             return;
-                        }*/
+                        }
 
                         var events = [{
                             gameId: cmd.gameId,

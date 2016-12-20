@@ -31,17 +31,20 @@ module.exports = function (injected) {
             return gameBoard[coordinates.x][coordinates.y] === "-";
         }
 
-        /*function isItYourTurn(event) {
-            return true; // use modulo 2 on turnsPlayed :)
-        }*/
+        function isItYourTurn(side) {
+            if(turnsPlayed % 2 === 0) {
+                return side === "X";
+            }
+            return side === "Y";
+        }
 
         processEvents(history);
 
         return {
             processEvents: processEvents,
             gameFull: gameFull,
-            isCellEmpty: isCellEmpty/*,
-            isItYourTurn: isItYourTurn*/
+            isCellEmpty: isCellEmpty,
+            isItYourTurn: isItYourTurn
         }
     };
 };

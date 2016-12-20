@@ -203,6 +203,34 @@ describe('place move command', function() {
         }];
     })
 
+    it('Should emit NotYourMove if attempting to make move out of turn...', function(){
+
+        given = [gameCreatedEvent, gameJoinedEvent, movePlacedXOnZeroZeroEvent];
+        when = {
+            gameId:"123987",
+            type: "PlaceMove",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:30:30",
+            side: "X",
+            coordinates: {
+                x: 0,
+                y: 1
+            }
+        };
+        then = [{
+            gameId:"123987",
+            type: "NotYourMove",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:30:30"
+        }];
+    })
+
     /*
     it('', function(){
 
@@ -214,10 +242,6 @@ describe('place move command', function() {
 });
 
 /*
-- Should emit NotYourMove if attempting to make move out of turn
-```
-Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}], When: {PlaceMove(0,1:X)}, Then: [{NotYourMove}]
-```
 - Should emit game won
 ```
 Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}, {MovePlaced(2,0:O)}, {MovePlaced(0,1:X)}, {MovePlaced(2,1:O)}], When: {PlaceMove(0,2:X)}, Then: [{GameWon}]

@@ -17,6 +17,9 @@ module.exports = function (injected) {
                 gameBoard[event.coordinates.x][event.coordinates.y] = event.side;
                 turnsPlayed++;
             }
+            if(event.type === "GameWon") {
+                gameOver = true;
+            }
         }
 
         function processEvents(history) {
@@ -38,13 +41,29 @@ module.exports = function (injected) {
             return side === "Y";
         }
 
+        function haveIWon(side) {
+            for(var i = 0; i < 3; i++){
+                if (gameBoard[0][i] ===  side && gameBoard[1][i] ===  side && gameBoard[2][i] ===  side) return true;
+                if (gameBoard[i][0] ===  side && gameBoard[i][1] ===  side && gameBoard[i][2] ===  side) return true;
+            }
+            if (gameBoard[0][0] ===  side && gameBoard[1][1] ===  side && gameBoard[2][2] ===  side) return true;
+            if (gameBoard[2][0] ===  side && gameBoard[1][1] ===  side && gameBoard[0][2] ===  side) return true;
+            return false;
+        }
+
+        function isGameOver() {
+            return gameOver;
+        }
+
         processEvents(history);
 
         return {
             processEvents: processEvents,
             gameFull: gameFull,
             isCellEmpty: isCellEmpty,
-            isItYourTurn: isItYourTurn
+            isItYourTurn: isItYourTurn,
+            haveIWon: haveIWon,
+            isGameOver: isGameOver
         }
     };
 };

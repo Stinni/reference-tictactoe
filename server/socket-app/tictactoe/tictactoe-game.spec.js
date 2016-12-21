@@ -231,6 +231,86 @@ describe('place move command', function() {
         }];
     })
 
+    it('Should emit game won...', function(){
+
+        given = [gameCreatedEvent, gameJoinedEvent, movePlacedXOnZeroZeroEvent, {
+                gameId:"123987",
+                type: "MovePlaced",
+                user: {
+                    userName: "Gummi"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2016-12-02T11:30:30",
+                side: "O",
+                coordinates: {
+                    x: 2,
+                    y: 0
+                }
+            },{
+                gameId:"123987",
+                type: "MovePlaced",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2016-12-02T11:31:00",
+                side: "X",
+                coordinates: {
+                    x: 0,
+                    y: 1
+                }
+            },{
+                gameId:"123987",
+                type: "MovePlaced",
+                user: {
+                    userName: "Gummi"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2016-12-02T11:31:30",
+                side: "O",
+                coordinates: {
+                    x: 2,
+                    y: 1
+                }
+            }
+        ];
+        when = {
+            gameId:"123987",
+            type: "PlaceMove",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:32:00",
+            side: "X",
+            coordinates: {
+                x: 0,
+                y: 2
+            }
+        };
+        then = [{
+            gameId:"123987",
+            type: "MovePlaced",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:32:00",
+            side: "X",
+            coordinates: {
+                x: 0,
+                y: 2
+            }
+        },{
+            gameId: "123987",
+            type: "GameWon",
+            user: { "userName": "TheGuy" },
+            name: "TheFirstGame",
+            timeStamp: "2016-12-02T11:32:00",
+            side: "X"
+        }];
+    })
+
     /*
     it('', function(){
 
@@ -242,10 +322,6 @@ describe('place move command', function() {
 });
 
 /*
-- Should emit game won
-```
-Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}, {MovePlaced(2,0:O)}, {MovePlaced(0,1:X)}, {MovePlaced(2,1:O)}], When: {PlaceMove(0,2:X)}, Then: [{GameWon}]
-```
 - Should not emit game draw if won on last move
 ```
 Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}, {MovePlaced(1,0:O)}, {MovePlaced(2,0:X)}, {MovePlaced(0,1:O)}, {MovePlaced(0,2:X)}, {MovePlaced(1,2:O)}, {MovePlaced(2,2:X)}, {MovePlaced(2,1:O)}], When: {PlaceMove(1,1:X)}, Then: [{GameWon}]

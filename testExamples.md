@@ -47,5 +47,5 @@ Given: [{GameCreated}, {GameJoined}, {MovePlaced(0,0:X)}, {MovePlaced(1,0:O)}, {
 ```
 - Should emit game draw when neither wins
 ```
-Given: [{GameCreated}, {GameJoined}, {MovePlaced(1,0:X)}, {MovePlaced(0,0:O)}, {MovePlaced(1,1:X)}, {MovePlaced(1,2:O)}, {MovePlaced(0,2:X)}, {MovePlaced(2,0:O)}, {MovePlaced(2,1:X)}, {MovePlaced(0,1:O)}], When: {PlaceMove(2,2:X)}, Then: [{GameWon}]
+Given: [{GameCreated}, {GameJoined}, {MovePlaced(1,0:X)}, {MovePlaced(0,0:O)}, {MovePlaced(1,1:X)}, {MovePlaced(1,2:O)}, {MovePlaced(0,2:X)}, {MovePlaced(2,0:O)}, {MovePlaced(2,1:X)}, {MovePlaced(0,1:O)}], When: {PlaceMove(2,2:X)}, Then: [{GameDraw}]
 ```

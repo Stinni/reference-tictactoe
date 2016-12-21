@@ -17,7 +17,7 @@ module.exports = function (injected) {
                 gameBoard[event.coordinates.x][event.coordinates.y] = event.side;
                 turnsPlayed++;
             }
-            if(event.type === "GameWon") {
+            if(event.type === "GameWon" || event.type === "GameDraw") {
                 gameOver = true;
             }
         }
@@ -51,6 +51,10 @@ module.exports = function (injected) {
             return false;
         }
 
+        function isGameADraw() {
+            return turnsPlayed >= 9;
+        }
+
         function isGameOver() {
             return gameOver;
         }
@@ -63,6 +67,7 @@ module.exports = function (injected) {
             isCellEmpty: isCellEmpty,
             isItYourTurn: isItYourTurn,
             haveIWon: haveIWon,
+            isGameADraw: isGameADraw,
             isGameOver: isGameOver
         }
     };

@@ -46,7 +46,18 @@ module.exports = function(injected){
 
                         // Check here for conditions which prevent command from altering state
 
-                        if(gameState.isGameOver() || !gameState.isCellEmpty(cmd.coordinates)) {
+                        if(gameState.isGameOver()) {
+                            eventHandler([{
+                                gameId: cmd.gameId,
+                                type: "GameOver",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp
+                            }]);
+                            return;
+                        }
+
+                        if(!gameState.isCellEmpty(cmd.coordinates)) {
                             eventHandler([{
                                 gameId: cmd.gameId,
                                 type: "IllegalMove",
@@ -86,6 +97,16 @@ module.exports = function(injected){
                             events.push({
                                 gameId: cmd.gameId,
                                 type: "GameWon",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp,
+                                side: cmd.side
+                            });
+                        }
+                        else if(gameState.isGameADraw()) {
+                            events.push({
+                                gameId: cmd.gameId,
+                                type: "GameDraw",
                                 user: cmd.user,
                                 name: cmd.name,
                                 timeStamp: cmd.timeStamp,

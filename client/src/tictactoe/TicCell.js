@@ -11,11 +11,14 @@ export default function (injected) {
             this.state = {
             }
         }
-        componentWillMount(){
+        componentWillMount() {
+        }
+        letsAlert() {
+            alert("Cell has been clicked!")
         }
         render() {
-            return <div className="ticcell">
-                CELL
+            return <div className="ticcell" onClick={this.letsAlert}>
+                {this.state.side}
             </div>
         }
     }

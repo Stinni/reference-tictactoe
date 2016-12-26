@@ -64,9 +64,5 @@ for a load test where multiple users will be playing.
             }
         );
 */
-
-
     });
-
 });
-

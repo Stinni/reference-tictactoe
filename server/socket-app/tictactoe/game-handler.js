@@ -58,6 +58,7 @@ module.exports = function (injected) {
                 if(commandMessage.gameId){
                     handleCommand(commandMessage);
                 } // else this is not a game command, ignore it
+                else {console.debug("The error is here...", commandMessage)}
             })
         }
     }
